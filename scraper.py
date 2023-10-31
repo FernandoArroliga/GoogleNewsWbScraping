@@ -1,4 +1,13 @@
-# Importing the Useful Libraries and Modules
+"""
+This is a web scraping script that allows you to scrape google
+news about technology.
+
+author: Fernando Arroliga
+created: 2023-10-30 
+version: 1.0
+"""
+
+# ------------- Importing the Useful Libraries and Modules
 from bs4 import BeautifulSoup
 import requests
 from datetime import datetime
@@ -6,19 +15,49 @@ from datetime import datetime
 # --------------- Functions for the Main Program --------------------
 
 def get_title_of_articles(soup):
+    """
 
+    This function gets the title of the articles
+    in the html file of google news webpage.
+
+    Parameters
+    ----------
+    soup : soup object
+        soup object with html content.
+
+    Returns
+    -------
+    list
+        A list containing the title of articles.
+    """
     title_of_the_articles = []
     article_tags = soup.find_all("article")
 
     for article in article_tags:
+        
         h3_tag = article.find("h3")
         h3_content = h3_tag.text
         title_of_the_articles.append(h3_content)
 
     return title_of_the_articles
 
-def get_link_of_articles(soup):
 
+def get_link_of_articles(soup):
+    """
+
+    This function gets the links of the articles
+    in the html file of google news webpage.
+
+    Parameters
+    ----------
+    soup : soup object
+        soup object with html content.
+
+    Returns
+    -------
+    list
+        A list containing the links of the articles.
+    """
     links = []
     article_tags = soup.find_all("article")
 
@@ -37,7 +76,16 @@ def get_link_of_articles(soup):
     return links
 
 def get_current_date():
+    """
 
+    This function gets the current date.
+    
+    Returns
+    -------
+    str
+        A string containing the current date with
+        the format: Tuesday_20.
+    """
     current_date = datetime.now().date()
     formatted_date = current_date.strftime("%A_%d")
 
